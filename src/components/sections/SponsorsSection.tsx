@@ -3,26 +3,22 @@ import Link from 'next/link';
 const sponsors = [
   {
     name: 'AlphaLand',
-    logo: 'https://officialalphaland.com/cdn/shop/t/6/assets/alphaland-logo-light_300x.png?v=51314615508447147621680285684',
-    darkBg: true,
+    logo: 'https://static.wixstatic.com/media/c5947c_d9ffd0de2d2343cd87bebb8830f160c9~mv2.png',
     url: 'https://officialalphaland.com/',
   },
   {
     name: 'Summer Shredding',
-    logo: 'https://cdn.shopify.com/s/files/1/0166/9385/4272/files/SSC-Logo-White_x320.png?v=1702411826',
-    darkBg: true,
+    logo: 'https://static.wixstatic.com/media/c5947c_02c14ec526d34acca8ba3fc922b08b37~mv2.png',
     url: 'https://summershredding.com/',
   },
   {
     name: 'HTX Posedown',
-    logo: null, // No direct logo available - uses text fallback
-    darkBg: false,
+    logo: 'https://static.wixstatic.com/media/c5947c_1c4393227cf943bc88e3189cc5d8dce2~mv2.png',
     url: 'https://www.instagram.com/htx_posedown/',
   },
   {
     name: 'Muscle Beach',
     logo: 'https://musclebeachclassic.com/wp-content/uploads/2024/08/image2-e1723822876553.png',
-    darkBg: false,
     url: 'https://musclebeachclassic.com/',
   },
 ];
@@ -50,7 +46,7 @@ export default function SponsorsSection() {
               className="group flex flex-col items-center gap-3 transition-all duration-300 hover:scale-110"
               title={sponsor.name}
             >
-              <div className={`relative w-[140px] h-[80px] md:w-[180px] md:h-[100px] flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-500 rounded-lg ${sponsor.darkBg ? 'bg-gray-900 p-3' : ''}`}>
+              <div className="relative w-[140px] h-[80px] md:w-[180px] md:h-[100px] flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-500 rounded-lg">
                 {sponsor.logo ? (
                   /* eslint-disable-next-line @next/next/no-img-element */
                   <img

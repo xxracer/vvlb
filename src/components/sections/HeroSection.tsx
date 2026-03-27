@@ -51,14 +51,6 @@ export default function HeroSection() {
         />
       </div>
       <div className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 z-20">
-        <Image
-          src="https://static.wixstatic.com/media/c5947c_749f90784a26462ba7c6f1731e13bc81~mv2.png"
-          alt="Award badge"
-          width={180}
-          height={90}
-          className="h-auto w-[75px] sm:w-[130px] md:w-[180px]"
-          priority
-        />
       </div>
       <style jsx>{`
         @keyframes fade-in-down {

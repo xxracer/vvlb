@@ -40,9 +40,9 @@ export default function GiftCardSection() {
   const handleSelect = (giftCard: AcuityPackage) => {
     toast({
       title: "Buying Gift Card...",
-      description: `You selected ${giftCard.name}.`,
+      description: `You selected ${giftCard.name}. Redirecting to purchase.`,
     });
-    router.push(`/schedule`);
+    router.push(`/schedule?package=${giftCard.id}`);
   };
 
   // No renderizar la sección si no hay gift cards y ya terminó de cargar

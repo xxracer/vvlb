@@ -10,10 +10,14 @@ function SchedulerIframe() {
   const searchParams = useSearchParams();
   const acuityOwnerID = '33624155';
   const appointmentType = searchParams.get('appointmentType');
+  const packageId = searchParams.get('package');
 
   let iframeSrc = `https://app.acuityscheduling.com/schedule.php?owner=${acuityOwnerID}&ref=embedded_csp`;
 
-  if (appointmentType) {
+  if (packageId) {
+    // URL para comprar directamente un paquete o certificado de regalo
+    iframeSrc = `https://app.acuityscheduling.com/catalog.php?owner=${acuityOwnerID}&action=addCart&id=${packageId}`;
+  } else if (appointmentType) {
     iframeSrc += `&appointmentType=${appointmentType}`;
   }
 
