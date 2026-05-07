@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:developers.acuityscheduling.com)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(curl -s -u \"33624155:4656af445b96a4a61d7d588b5f32b7bf\" \"https://acuityscheduling.com/api/v1/appointment-types\")",
+      "Bash(curl -s -u \"33624155:4656af445b96a4a61d7d588b5f32b7bf\" \"https://acuityscheduling.com/api/v1/appointment-addons\")",
+      "Bash(curl -s -u \"33624155:4656af445b96a4a61d7d588b5f32b7bf\" \"https://acuityscheduling.com/api/v1/products\")",
+      "Bash(curl -s -u \"33624155:4656af445b96a4a61d7d588b5f32b7bf\" \"https://acuityscheduling.com/api/v1/calendars\")",
+      "Bash(npm install *)",
+      "Bash(node *)",
+      "Bash(curl -s -u \"33624155:4656af445b96a4a61d7d588b5f32b7bf\" \"https://acuityscheduling.com/api/v1/appointment-types/69982766\")",
+      "Bash(curl -s -u \"33624155:4656af445b96a4a61d7d588b5f32b7bf\" \"https://acuityscheduling.com/api/v1/forms\")"
+    ]
+  }
+}

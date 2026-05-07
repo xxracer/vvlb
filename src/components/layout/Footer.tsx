@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Facebook, Instagram } from 'lucide-react';
+import { Facebook, Instagram, MapPin, Phone } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Footer() {
@@ -7,45 +7,56 @@ export default function Footer() {
   const iconUrl = "https://static.wixstatic.com/media/c5947c_105b98aad40c4d4c8ca7de374634e9fa~mv2.png";
 
   return (
-    <footer className="bg-secondary text-secondary-foreground mt-auto">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <Link href="/" className="flex items-center space-x-2 text-primary mb-4">
-              <Image src={iconUrl} alt="Sparkle" width={32} height={32} />
+    <footer className="bg-[#0a0a0a] border-t border-white/5 mt-auto">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="space-y-4">
+            <Link href="/" className="flex items-center space-x-2 text-white mb-4">
+              <Image src={iconUrl} alt="Sparkle" width={32} height={32} className="h-8 w-8" />
               <span className="text-2xl font-headline font-semibold">Viva La Beauty</span>
             </Link>
-            <p className="text-sm">
+            <p className="text-sm text-gray-400 leading-relaxed">
               Your premier destination for waxing and beauty services in Sugar Land, Texas.
             </p>
-            <p className="text-sm mt-2">
-              15315 Southwest Fwy ste. 192, Sugar Land, TX 77478
-            </p>
-            <p className="text-sm">
-              (832)316-1814
-            </p>
+            <div className="flex items-start gap-2 text-gray-400 text-sm">
+              <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0 text-[#D8006E]" />
+              <span>15315 Southwest Fwy ste. 192, Sugar Land, TX 77478</span>
+            </div>
+            <div className="flex items-center gap-2 text-gray-400 text-sm">
+              <Phone className="h-4 w-4 text-[#D8006E]" />
+              <span>(832) 316-1814</span>
+            </div>
           </div>
 
           <div>
-            <h3 className="text-lg font-headline font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/services" className="hover:text-primary transition-colors">Services</Link></li>
-              <li><Link href="/book" className="hover:text-primary transition-colors">Book Appointment</Link></li>
-              <li><Link href="/#testimonials" className="hover:text-primary transition-colors">Testimonials</Link></li>
+            <h3 className="text-lg font-headline font-semibold mb-6 text-white">Quick Links</h3>
+            <ul className="space-y-3 text-sm">
+              <li>
+                <Link href="/services" className="text-gray-400 hover:text-[#D8006E] transition-colors duration-300">Services</Link>
+              </li>
+              <li>
+                <Link href="/book" className="text-gray-400 hover:text-[#D8006E] transition-colors duration-300">Book Appointment</Link>
+              </li>
+              <li>
+                <Link href="/#testimonials" className="text-gray-400 hover:text-[#D8006E] transition-colors duration-300">Testimonials</Link>
+              </li>
+              <li>
+                <Link href="/training" className="text-gray-400 hover:text-[#D8006E] transition-colors duration-300">Training</Link>
+              </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-lg font-headline font-semibold mb-4">Connect With Us</h3>
+            <h3 className="text-lg font-headline font-semibold mb-6 text-white">Connect With Us</h3>
             <div className="flex space-x-4">
               <a
                 href="https://www.instagram.com/vivalabeautywax2025"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="text-secondary-foreground hover:text-primary transition-colors"
+                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#D8006E] hover:border-[#D8006E]/30 hover:bg-[#D8006E]/10 transition-all duration-300"
               >
-                <Instagram size={24} />
+                <Instagram size={20} />
               </a>
 
               <a
@@ -53,9 +64,9 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="text-secondary-foreground hover:text-primary transition-colors"
+                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#D8006E] hover:border-[#D8006E]/30 hover:bg-[#D8006E]/10 transition-all duration-300"
               >
-                <Facebook size={24} />
+                <Facebook size={20} />
               </a>
 
               <a
@@ -63,22 +74,23 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="TikTok"
-                className="text-secondary-foreground hover:text-primary transition-colors"
+                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#D8006E] hover:border-[#D8006E]/30 hover:bg-[#D8006E]/10 transition-all duration-300"
               >
-                {/* Nuevo ícono de TikTok con diseño reconocible */}
-                <TiktokIcon size={24} />
+                <TiktokIcon size={20} />
               </a>
             </div>
           </div>
         </div>
-        <div className="mt-8 pt-8 border-t border-border text-center text-sm">
+
+        <div className="mt-12 pt-8 border-t border-white/5 text-center text-sm text-gray-500">
           <p>&copy; {currentYear} Viva La Beauty. All rights reserved.</p>
-          <p className="mt-1">Designed with <HeartIcon className="inline h-4 w-4 text-primary" /> in Sugar Land, TX</p>
+          <p className="mt-2">Designed with <HeartIcon className="inline h-4 w-4 text-[#D8006E]" /> in Sugar Land, TX</p>
         </div>
       </div>
     </footer>
   );
-}// Componente actualizado para el ícono de TikTok con diseño reconocible
+}
+
 function TiktokIcon({ size = 24, ...props }: React.SVGProps<SVGSVGElement> & { size?: number }) {
   return (
     <svg

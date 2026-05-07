@@ -30,14 +30,14 @@ export default function ServicesPage() {
           fetch('/api/services'),
           fetch('/api/packages')
         ]);
-        
+
         if (!servicesRes.ok || !packagesRes.ok) {
           throw new Error('Failed to fetch data');
         }
-        
+
         const fetchedServices = await servicesRes.json();
         const fetchedPackages = await packagesRes.json();
-        
+
         console.log("Fetched Services:", fetchedServices.length);
         console.log("Fetched Packages:", fetchedPackages.length);
 
@@ -60,7 +60,7 @@ export default function ServicesPage() {
   useEffect(() => {
     let servicesToDisplay: (AcuityAppointmentType | AcuityPackage)[] = [];
     const menKeywords = ["men's", "gentleman’s", "the gentleman's"];
-    
+
     const categories: Record<SubCategory, string[]> = {
       'Face': ['nose', 'lip', 'chin', 'brow', 'eyebrow', 'face', 'sideburn', 'ear', 'facial'],
       'Mid Body': ['back', 'chest', 'stomach', 'underarm', 'arm'],
@@ -88,25 +88,33 @@ export default function ServicesPage() {
         servicesToDisplay = genderSpecificServices;
       }
     } else if (category === 'gift-package') {
-      // Se combinan gift cards y packages en displayedServices (se separan en el renderizado)
       servicesToDisplay = allPackages;
+    } else {
+      // No category selected: show ALL services by default
+      servicesToDisplay = allServices;
     }
-    
+
     setDisplayedServices(servicesToDisplay);
   }, [category, activeSubCategory, allServices, allPackages]);
 
   const handleServiceSelect = (service: AcuityAppointmentType | AcuityPackage) => {
     const isPackage = 'kind' in service;
-    toast({
-      title: isPackage ? (service.isGiftCertificate ? "Buying Gift Card..." : "Buying Package...") : "Starting Booking...",
-      description: `You are booking for ${service.name}.`,
-    });
-    
     if (isPackage) {
-      router.push(`/schedule`); 
-    } else {
-      router.push(`/schedule?appointmentType=${service.id}`);
+      // Gift cards y packages se navegan directamente
+      toast({
+        title: service.isGiftCertificate ? "Buying Gift Card..." : "Buying Package...",
+        description: `You are booking for ${service.name}.`,
+      });
+      router.push(`/schedule?package=${service.id}`);
+      return;
     }
+
+    // Servicio regular: ir directo al iframe de Acuity
+    toast({
+      title: "Booking...",
+      description: `You are booking ${service.name}.`,
+    });
+    router.push(`/schedule?appointmentType=${service.id}`);
   };
 
   const selectCategory = (selectedCategory: 'women' | 'men' | 'gift-package') => {
@@ -122,40 +130,52 @@ export default function ServicesPage() {
   const subCategories: SubCategory[] = ['Face', 'Mid Body', 'Lower Body'];
 
   return (
-    <div className="bg-background py-12 md:py-16">
+    <div className="bg-[#ffe5ec] py-12 md:py-16 min-h-screen">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-headline font-semibold text-primary mb-4 flex items-center justify-center">
-            <Image src="https://static.wixstatic.com/media/c5947c_105b98aad40c4d4c8ca7de374634e9fa~mv2.png" alt="" width={40} height={40} className="mr-3 h-10 w-10" />
+          <span className="text-[#D8006E] text-sm font-semibold tracking-widest uppercase mb-4 block">Services</span>
+          <h1 className="text-5xl font-headline font-bold text-[#1a1a1a] mb-4">
             Our Beauty & Waxing Services
-            <Image src="https://static.wixstatic.com/media/c5947c_105b98aad40c4d4c8ca7de374634e9fa~mv2.png" alt="" width={40} height={40} className="ml-3 h-10 w-10" />
           </h1>
-          <p className="text-xl text-foreground max-w-2xl mx-auto font-body">
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto font-body">
             Discover a comprehensive range of treatments designed to make you look and feel your best.
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-4 mb-8">
-          <Button onClick={() => selectCategory('women')} variant={category === 'women' ? 'default' : 'outline'} className="gap-2">
+        <div className="flex flex-wrap justify-center gap-3 mb-8">
+          <Button
+            onClick={() => selectCategory('women')}
+            variant={category === 'women' ? 'default' : 'outline'}
+            className={category === 'women' ? 'bg-gradient-to-r from-[#D8006E] to-[#b8005e] text-white border-0 rounded-full px-6' : 'rounded-full px-6 border-gray-200 text-gray-700 hover:border-[#D8006E]/30 hover:text-[#D8006E]'}
+          >
             <User className="h-4 w-4" /> Women
           </Button>
-          <Button onClick={() => selectCategory('men')} variant={category === 'men' ? 'default' : 'outline'} className="gap-2">
+          <Button
+            onClick={() => selectCategory('men')}
+            variant={category === 'men' ? 'default' : 'outline'}
+            className={category === 'men' ? 'bg-gradient-to-r from-[#7400D8] to-[#5e00b0] text-white border-0 rounded-full px-6' : 'rounded-full px-6 border-gray-200 text-gray-700 hover:border-[#7400D8]/30 hover:text-[#7400D8]'}
+          >
             <UserPlus className="h-4 w-4" /> Men
           </Button>
-          <Button onClick={() => selectCategory('gift-package')} variant={category === 'gift-package' ? 'default' : 'outline'} className="gap-2">
+          <Button
+            onClick={() => selectCategory('gift-package')}
+            variant={category === 'gift-package' ? 'default' : 'outline'}
+            className={category === 'gift-package' ? 'bg-gradient-to-r from-[#D8006E] to-[#b8005e] text-white border-0 rounded-full px-6' : 'rounded-full px-6 border-gray-200 text-gray-700 hover:border-[#D8006E]/30 hover:text-[#D8006E]'}
+          >
             <Gift className="h-4 w-4" /> Gift Cards & Packages
           </Button>
         </div>
 
         {(category === 'women' || category === 'men') && (
-          <div className="flex justify-center gap-4 mb-12">
-            {subCategories.map(category => (
-              <Button 
-                key={category}
-                onClick={() => selectSubCategory(category)} 
-                variant={activeSubCategory === category ? 'secondary' : 'outline'}
+          <div className="flex justify-center gap-3 mb-12">
+            {subCategories.map(subCat => (
+              <Button
+                key={subCat}
+                onClick={() => selectSubCategory(subCat)}
+                variant={activeSubCategory === subCat ? 'secondary' : 'outline'}
+                className={activeSubCategory === subCat ? 'bg-[#D8006E]/10 text-[#D8006E] border-[#D8006E]/20 rounded-full' : 'rounded-full border-gray-200 text-gray-600 hover:border-[#D8006E]/20'}
               >
-                {category}
+                {subCat}
               </Button>
             ))}
           </div>
@@ -177,8 +197,8 @@ export default function ServicesPage() {
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {giftCards.map((service) => (
-                      <ServiceCard 
-                        key={service.id} 
+                      <ServiceCard
+                        key={service.id}
                         service={service}
                         onSelect={() => handleServiceSelect(service)}
                         isSelected={false}
@@ -199,8 +219,8 @@ export default function ServicesPage() {
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {packages.map((service) => (
-                      <ServiceCard 
-                        key={service.id} 
+                      <ServiceCard
+                        key={service.id}
                         service={service}
                         onSelect={() => handleServiceSelect(service)}
                         isSelected={false}
@@ -218,12 +238,12 @@ export default function ServicesPage() {
               </p>
             )}
           </>
-        ) : category ? (
+        ) : (
           hasServices ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {displayedServices.map((service) => (
-                <ServiceCard 
-                  key={service.id} 
+                <ServiceCard
+                  key={service.id}
                   service={service}
                   onSelect={() => handleServiceSelect(service)}
                   isSelected={false}
@@ -235,10 +255,6 @@ export default function ServicesPage() {
               No services found for this category. Please check back soon or contact us!
             </p>
           )
-        ) : (
-            <p className="text-center text-muted-foreground font-body text-lg">
-                Please select a category to view services.
-            </p>
         )}
       </div>
     </div>
