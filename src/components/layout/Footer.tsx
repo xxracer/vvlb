@@ -40,9 +40,6 @@ export default function Footer() {
               <li>
                 <Link href="/#testimonials" className="text-gray-400 hover:text-[#D8006E] transition-colors duration-300">Testimonials</Link>
               </li>
-              <li>
-                <Link href="/training" className="text-gray-400 hover:text-[#D8006E] transition-colors duration-300">Training</Link>
-              </li>
             </ul>
           </div>
 
@@ -50,7 +47,7 @@ export default function Footer() {
             <h3 className="text-lg font-headline font-semibold mb-6 text-white">Connect With Us</h3>
             <div className="flex space-x-4">
               <a
-                href="https://www.instagram.com/vivalabeautywax2025"
+                href="https://www.instagram.com/vivalabeautywax?igsh=dDF5cDFmM204bnVv"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"

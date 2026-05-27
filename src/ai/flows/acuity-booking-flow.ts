@@ -164,6 +164,16 @@ export async function getAcuityAddons(): Promise<AcuityAddon[]> {
   return z.array(AcuityAddonSchema).parse(data);
 }
 
+/**
+ * Returns active, non-private add-ons from Acuity.
+ * Note: Acuity does not provide a "popular" flag, so this returns all public active add-ons.
+ * To highlight specific popular add-ons, maintain a curated list of names/IDs on the frontend.
+ */
+export async function getPopularAddons(): Promise<AcuityAddon[]> {
+  const addons = await getAcuityAddons();
+  return addons.filter(a => a.active && !a.private);
+}
+
 export async function getAcuityPackages(): Promise<AcuityPackage[]> {
   const data = await fetchAcuityAPI('/products');
   return z.array(AcuityPackageSchema).parse(data);

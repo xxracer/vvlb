@@ -61,7 +61,7 @@ export default function AboutSection() {
               </span>
             </h2>
             <p className="text-lg text-gray-500 mb-6 font-body leading-relaxed">
-              Nestled in the heart of Sugar Land, Viva La Beauty is more than a salon — it's a sanctuary where expertise meets passion. With over a decade of experience, Vanessa has perfected the art of waxing, combining speed, comfort, and flawless results in every session.
+              Right here in Sugar Land, Viva La Beauty is where you come to get smooth and feel your best. Vanessa has been doing this for over 12 years and knows how to make waxing quick, comfortable, and worth it every single time.
             </p>
             <p className="text-lg text-gray-500 mb-10 font-body leading-relaxed">
               Whether you're preparing for a competition, a special occasion, or simply treating yourself, you'll leave feeling refreshed, empowered, and undeniably beautiful.

@@ -12,8 +12,10 @@ export default function BookingPage() {
     <div className="bg-gradient-to-br from-pink-50 via-background to-purple-50 py-12 md:py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-headline font-semibold text-primary mb-4 flex items-center justify-center">
-             <Image src="https://static.wixstatic.com/media/c5947c_105b98aad40c4d4c8ca7de374634e9fa~mv2.png" alt="" width={40} height={40} className="mr-3 h-10 w-10" />
+          <div className="flex justify-center mb-4">
+            <Image src="https://static.wixstatic.com/media/c5947c_105b98aad40c4d4c8ca7de374634e9fa~mv2.png" alt="Viva La Beauty" width={60} height={60} className="h-16 w-16" />
+          </div>
+          <h1 className="text-4xl md:text-5xl font-headline font-semibold text-primary mb-4">
             Create Your Perfect Appointment
           </h1>
           <p className="text-xl text-foreground max-w-3xl mx-auto font-body">

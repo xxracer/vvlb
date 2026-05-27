@@ -78,6 +78,13 @@ export default function AcuityScheduler() {
     const servicesForArea = categorizeServicesForArea(allAppointmentTypes, selectedGender, area);
     setServicesForSelectedArea(servicesForArea);
     setSelectedAreaTitle(readableCategory);
+    // Scroll to services list on mobile so users see the results
+    setTimeout(() => {
+      const servicesList = document.getElementById('services-list');
+      if (servicesList) {
+        servicesList.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
   };
 
   const handleBookService = (service: AcuityAppointmentType) => {
@@ -151,7 +158,7 @@ export default function AcuityScheduler() {
                     </div>
                 </div>
 
-                <div className="md:col-span-7 lg:col-span-8 space-y-6">
+                <div id="services-list" className="md:col-span-7 lg:col-span-8 space-y-6">
                     <div className="p-1">
                         {selectedAreaTitle ? (
                             <>

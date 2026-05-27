@@ -145,6 +145,20 @@ export default function HeroSection({ review }: { review?: ReviewData }) {
                   <p className="text-sm font-bold text-[#1a1a1a] leading-tight">Sugar Land, TX</p>
                 </div>
               </div>
+              {/* Houston's Best Award - visible on mobile */}
+              <div className="flex lg:hidden items-center gap-2 bg-white/40 backdrop-blur-xl border border-white/50 rounded-2xl px-4 py-3 shadow-sm">
+                <Image
+                  src="https://static.wixstatic.com/media/285fa5_0b0d21708449487b8104e8d671332e56~mv2.png/v1/fill/w_610,h_304,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/houstonsbest.png"
+                  alt="Houston's Best"
+                  width={80}
+                  height={40}
+                  className="h-auto w-[70px]"
+                />
+                <div className="text-left">
+                  <p className="text-sm font-bold text-[#1a1a1a]">Houston&apos;s Best</p>
+                  <p className="text-xs text-gray-500">Award Winning Studio</p>
+                </div>
+              </div>
             </div>
           </div>
 

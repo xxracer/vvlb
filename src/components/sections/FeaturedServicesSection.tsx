@@ -21,9 +21,12 @@ export default function FeaturedServicesSection() {
         setIsLoading(true);
         const allServices = (await getAcuityAppointmentTypes()).filter(s => !s.private);
 
-        const popularServiceKeywords = ["brazilian", "full leg", "under arm"];
+        const popularServiceKeywords = ["brazilian", "full leg", "brow"];
         const featured = popularServiceKeywords.map(keyword => {
-          return allServices.find(s => s.name.toLowerCase().includes(keyword));
+          return allServices.find(s =>
+            s.name.toLowerCase().includes(keyword) &&
+            !s.name.toLowerCase().includes("men's")
+          );
         }).filter((service): service is AcuityAppointmentType => service !== undefined);
 
         setFeaturedServices(featured);

@@ -26,7 +26,7 @@ export default function ServiceCard({ service, onSelect, isSelected }: ServiceCa
       <CardHeader className="p-0">
         <div className="relative w-full h-64 bg-gray-50 overflow-hidden">
           <Image
-            src={service.image || `https://placehold.co/600x400/f3f4f6/D8006E?text=${encodeURIComponent(service.name)}`}
+            src={service.image || "https://static.wixstatic.com/media/c5947c_105b98aad40c4d4c8ca7de374634e9fa~mv2.png"}
             alt={service.name}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
