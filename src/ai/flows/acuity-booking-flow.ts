@@ -16,7 +16,7 @@ const ACUITY_API_BASE_URL = 'https://acuityscheduling.com/api/v1';
 const ACUITY_USER_ID = process.env.ACUITY_USER_ID;
 const ACUITY_API_KEY = process.env.ACUITY_API_KEY;
 
-async function fetchAcuityAPI(endpoint: string, options: RequestInit = {}) {
+export async function fetchAcuityAPI(endpoint: string, options: RequestInit = {}) {
   if (!ACUITY_USER_ID || !ACUITY_API_KEY) {
     throw new Error('Acuity API credentials are not configured.');
   }

@@ -11,13 +11,14 @@ import { Button } from '@/components/ui/button';
 import { Gift, Box, User, UserPlus } from 'lucide-react';
 
 type SubCategory = 'Face' | 'Mid Body' | 'Lower Body';
+type ServiceCategory = 'women' | 'men' | 'gift-package' | 'all';
 
 export default function ServicesPage() {
   const [allServices, setAllServices] = useState<AcuityAppointmentType[]>([]);
   const [allPackages, setAllPackages] = useState<AcuityPackage[]>([]);
   const [displayedServices, setDisplayedServices] = useState<(AcuityAppointmentType | AcuityPackage)[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [category, setCategory] = useState<'women' | 'men' | 'gift-package' | null>(null);
+  const [category, setCategory] = useState<ServiceCategory | null>(null);
   const [activeSubCategory, setActiveSubCategory] = useState<SubCategory | null>(null);
   const { toast } = useToast();
   const router = useRouter();
@@ -89,8 +90,7 @@ export default function ServicesPage() {
       }
     } else if (category === 'gift-package') {
       servicesToDisplay = allPackages;
-    } else {
-      // No category selected: show ALL services by default
+    } else if (category === 'all') {
       servicesToDisplay = allServices;
     }
 
@@ -117,7 +117,7 @@ export default function ServicesPage() {
     router.push(`/schedule?appointmentType=${service.id}`);
   };
 
-  const selectCategory = (selectedCategory: 'women' | 'men' | 'gift-package') => {
+  const selectCategory = (selectedCategory: ServiceCategory) => {
     setCategory(selectedCategory);
     setActiveSubCategory(null);
   };
@@ -164,10 +164,17 @@ export default function ServicesPage() {
           >
             <Gift className="h-4 w-4" /> Gift Cards & Packages
           </Button>
+          <Button
+            onClick={() => selectCategory('all')}
+            variant={category === 'all' ? 'default' : 'outline'}
+            className={category === 'all' ? 'bg-gradient-to-r from-[#1a1a1a] to-[#333333] text-white border-0 rounded-full px-6' : 'rounded-full px-6 border-gray-200 text-gray-700 hover:border-[#1a1a1a]/30 hover:text-[#1a1a1a]'}
+          >
+            View All
+          </Button>
         </div>
 
         {(category === 'women' || category === 'men') && (
-          <div className="flex justify-center gap-3 mb-12">
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
             {subCategories.map(subCat => (
               <Button
                 key={subCat}
@@ -238,23 +245,31 @@ export default function ServicesPage() {
               </p>
             )}
           </>
-        ) : (
-          hasServices ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {displayedServices.map((service) => (
-                <ServiceCard
-                  key={service.id}
-                  service={service}
-                  onSelect={() => handleServiceSelect(service)}
-                  isSelected={false}
-                />
-              ))}
+        ) : category === null ? (
+          <div className="text-center py-16 px-4">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white shadow-md mb-6">
+              <User className="h-10 w-10 text-[#D8006E]" />
             </div>
-          ) : (
-            <p className="text-center text-muted-foreground font-body text-lg">
-              No services found for this category. Please check back soon or contact us!
+            <h3 className="text-2xl font-headline font-semibold text-[#1a1a1a] mb-3">Select a Category</h3>
+            <p className="text-gray-500 max-w-md mx-auto font-body">
+              Tap Women, Men, Gift Cards & Packages, or View All above to browse our services.
             </p>
-          )
+          </div>
+        ) : hasServices ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {displayedServices.map((service) => (
+              <ServiceCard
+                key={service.id}
+                service={service}
+                onSelect={() => handleServiceSelect(service)}
+                isSelected={false}
+              />
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-muted-foreground font-body text-lg">
+            No services found for this category. Please check back soon or contact us!
+          </p>
         )}
       </div>
     </div>

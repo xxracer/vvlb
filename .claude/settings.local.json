@@ -12,7 +12,17 @@
       "Bash(npm install *)",
       "Bash(node *)",
       "Bash(curl -s -u \"33624155:4656af445b96a4a61d7d588b5f32b7bf\" \"https://acuityscheduling.com/api/v1/appointment-types/69982766\")",
-      "Bash(curl -s -u \"33624155:4656af445b96a4a61d7d588b5f32b7bf\" \"https://acuityscheduling.com/api/v1/forms\")"
+      "Bash(curl -s -u \"33624155:4656af445b96a4a61d7d588b5f32b7bf\" \"https://acuityscheduling.com/api/v1/forms\")",
+      "WebFetch(domain:docs.sendblue.com)",
+      "Bash(npx playwright *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:9002/)",
+      "Bash(curl -s http://localhost:9002/)",
+      "Bash(npx *)",
+      "Bash(cp /tmp/mobile-check.js ./mobile-check.js)",
+      "Bash(rm ./mobile-check.js)",
+      "Bash(netstat -ano)",
+      "Bash(taskkill //F //IM node.exe)",
+      "Bash(curl -s http://localhost:9002/admin/sms)"
     ]
   }
 }

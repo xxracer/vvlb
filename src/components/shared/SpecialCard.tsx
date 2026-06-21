@@ -18,8 +18,9 @@ export default function SpecialCard({ offer }: SpecialCardProps) {
             <Image
               src={offer.imageUrl}
               alt={offer.title}
-              layout="fill"
-              objectFit="cover"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              style={{ objectFit: 'cover' }}
               className="transition-transform duration-500 hover:scale-105"
               data-ai-hint={offer.imageHint || 'special offer'}
             />

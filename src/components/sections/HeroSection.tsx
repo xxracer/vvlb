@@ -44,7 +44,7 @@ export default function HeroSection({ review }: { review?: ReviewData }) {
 
       {/* Watermark logo */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-        <div className="relative w-[1000px] h-[2500px] md:w-[1060px] md:h-[1100px] lg:w-[1500px] lg:h-[2000px] max-w-[70000px] max-h-[500000px] md:max-w-[100000px] md:max-h-[70000px] lg:max-w-[100400px] lg:max-h-[90000px] opacity-[0.4]">
+        <div className="relative w-[700px] h-[700px] sm:w-[900px] sm:h-[900px] md:w-[1100px] md:h-[1100px] lg:w-[1400px] lg:h-[1400px] opacity-[0.4]">
           <Image
             src="https://static.wixstatic.com/media/c5947c_105b98aad40c4d4c8ca7de374634e9fa~mv2.png"
             alt=""
@@ -62,11 +62,11 @@ export default function HeroSection({ review }: { review?: ReviewData }) {
             {/* Badge */}
             <div className="mb-6 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/60 backdrop-blur-xl border border-[#D8006E]/10 shadow-sm animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
               <span className="w-2 h-2 rounded-full bg-[#D8006E] animate-pulse" />
-              <span className="text-sm text-[#D8006E] tracking-widest uppercase font-semibold">Houston&apos;s Best Waxing Studio</span>
+              <span className="text-xs sm:text-sm text-[#D8006E] tracking-widest uppercase font-semibold">Houston&apos;s Best Waxing Studio</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-6xl md:text-7xl lg:text-[6.5rem] font-headline font-bold text-[#1a1a1a] leading-[0.9] tracking-tight mb-6 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[6.5rem] font-headline font-bold text-[#1a1a1a] leading-[0.9] tracking-tight mb-6 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
               Viva La
               <span className="block bg-gradient-to-r from-[#D8006E] via-[#ff4da6] to-[#7400D8] bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(216,0,110,0.3)]">
                 Beauty
@@ -83,7 +83,7 @@ export default function HeroSection({ review }: { review?: ReviewData }) {
               {['Brazilian Wax', 'Full Leg', 'Underarm', 'Brow & Face'].map((tag) => (
                 <span
                   key={tag}
-                  className="inline-flex items-center px-4 py-1.5 rounded-full bg-white/50 backdrop-blur-md border border-[#D8006E]/10 text-sm text-[#D8006E] font-medium shadow-sm"
+                  className="inline-flex items-center px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-white/50 backdrop-blur-md border border-[#D8006E]/10 text-xs sm:text-sm text-[#D8006E] font-medium shadow-sm"
                 >
                   {tag}
                 </span>
@@ -95,7 +95,7 @@ export default function HeroSection({ review }: { review?: ReviewData }) {
               <Button
                 size="lg"
                 asChild
-                className="relative bg-gradient-to-r from-[#D8006E] to-[#b8005e] hover:from-[#e61a7d] hover:to-[#c90069] text-white border-0 shadow-xl shadow-[#D8006E]/30 hover:shadow-2xl hover:shadow-[#D8006E]/40 transition-all duration-500 px-10 py-7 text-lg rounded-full hover:-translate-y-1 overflow-hidden group"
+                className="relative bg-gradient-to-r from-[#D8006E] to-[#b8005e] hover:from-[#e61a7d] hover:to-[#c90069] text-white border-0 shadow-xl shadow-[#D8006E]/30 hover:shadow-2xl hover:shadow-[#D8006E]/40 transition-all duration-500 px-8 py-6 sm:px-10 sm:py-7 text-base sm:text-lg rounded-full hover:-translate-y-1 overflow-hidden group"
               >
                 <Link href="/book">
                   <span className="absolute inset-0 bg-white/20 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700" />
@@ -107,7 +107,7 @@ export default function HeroSection({ review }: { review?: ReviewData }) {
                 size="lg"
                 variant="outline"
                 asChild
-                className="border-[#1a1a1a]/15 text-[#1a1a1a] hover:bg-white/60 hover:border-[#1a1a1a]/25 transition-all duration-300 px-10 py-7 text-lg rounded-full bg-white/30 backdrop-blur-md hover:-translate-y-1"
+                className="border-[#1a1a1a]/15 text-[#1a1a1a] hover:bg-white/60 hover:border-[#1a1a1a]/25 transition-all duration-300 px-8 py-6 sm:px-10 sm:py-7 text-base sm:text-lg rounded-full bg-white/30 backdrop-blur-md hover:-translate-y-1"
               >
                 <Link href="/services">
                   Explore Services
@@ -118,8 +118,8 @@ export default function HeroSection({ review }: { review?: ReviewData }) {
 
             {/* Trust Badges */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
-              <div className="flex items-center gap-2 bg-white/40 backdrop-blur-xl border border-white/50 rounded-2xl px-4 py-3 shadow-sm">
-                <div className="w-9 h-9 rounded-full bg-[#D8006E]/10 flex items-center justify-center">
+              <div className="flex items-center gap-2 bg-white/40 backdrop-blur-xl border border-white/50 rounded-2xl px-3 py-2 sm:px-4 sm:py-3 shadow-sm">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#D8006E]/10 flex items-center justify-center">
                   <Star className="h-4 w-4 text-[#D8006E] fill-[#D8006E]" />
                 </div>
                 <div className="text-left">
@@ -127,8 +127,8 @@ export default function HeroSection({ review }: { review?: ReviewData }) {
                   <p className="text-sm font-bold text-[#1a1a1a] leading-tight">5.0 Stars</p>
                 </div>
               </div>
-              <div className="flex items-center gap-2 bg-white/40 backdrop-blur-xl border border-white/50 rounded-2xl px-4 py-3 shadow-sm">
-                <div className="w-9 h-9 rounded-full bg-[#7400D8]/10 flex items-center justify-center">
+              <div className="flex items-center gap-2 bg-white/40 backdrop-blur-xl border border-white/50 rounded-2xl px-3 py-2 sm:px-4 sm:py-3 shadow-sm">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#7400D8]/10 flex items-center justify-center">
                   <Clock className="h-4 w-4 text-[#7400D8]" />
                 </div>
                 <div className="text-left">
@@ -136,8 +136,8 @@ export default function HeroSection({ review }: { review?: ReviewData }) {
                   <p className="text-sm font-bold text-[#1a1a1a] leading-tight">12+ Years</p>
                 </div>
               </div>
-              <div className="flex items-center gap-2 bg-white/40 backdrop-blur-xl border border-white/50 rounded-2xl px-4 py-3 shadow-sm">
-                <div className="w-9 h-9 rounded-full bg-[#ff4da6]/10 flex items-center justify-center">
+              <div className="flex items-center gap-2 bg-white/40 backdrop-blur-xl border border-white/50 rounded-2xl px-3 py-2 sm:px-4 sm:py-3 shadow-sm">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#ff4da6]/10 flex items-center justify-center">
                   <MapPin className="h-4 w-4 text-[#ff4da6]" />
                 </div>
                 <div className="text-left">

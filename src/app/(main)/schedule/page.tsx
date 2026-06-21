@@ -27,14 +27,15 @@ function SchedulerIframe() {
   }
 
   return (
-    <div className="aspect-w-16 aspect-h-9 md:aspect-none" style={{ minHeight: '800px' }}>
-      <iframe 
-        src={iframeSrc} 
-        title="Schedule Appointment" 
-        width="100%" 
-        height="800"
+    <div className="w-full overflow-hidden rounded-lg h-[700px] sm:h-[800px]">
+      <iframe
+        src={iframeSrc}
+        title="Schedule Appointment"
+        width="100%"
+        height="100%"
         frameBorder="0"
         loading="lazy"
+        className="w-full h-full"
       ></iframe>
     </div>
   );
