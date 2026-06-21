@@ -22,7 +22,8 @@
       "Bash(rm ./mobile-check.js)",
       "Bash(netstat -ano)",
       "Bash(taskkill //F //IM node.exe)",
-      "Bash(curl -s http://localhost:9002/admin/sms)"
+      "Bash(curl -s http://localhost:9002/admin/sms)",
+      "Bash(pnpm install *)"
     ]
   }
 }
