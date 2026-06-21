@@ -5,7 +5,6 @@ import {
   checkSendQuota,
   E164_PHONE_REGEX,
   getClientIp,
-  hasOptOutInstruction,
   MAX_MESSAGE_LENGTH,
   RATE_LIMIT,
   requireAdminSession,
@@ -46,16 +45,10 @@ export async function POST(request: Request) {
       );
     }
 
-    const recipients: SendblueRecipient[] = parsed.items.map((item) => {
-      const sanitizedMessage = sanitizeSmsText(item.message);
-      if (!hasOptOutInstruction(sanitizedMessage)) {
-        throw new Error('Message must include an opt-out instruction such as "Reply STOP to opt out."');
-      }
-      return {
-        phone: item.phone,
-        message: sanitizedMessage,
-      };
-    });
+    const recipients: SendblueRecipient[] = parsed.items.map((item) => ({
+      phone: item.phone,
+      message: sanitizeSmsText(item.message),
+    }));
 
     const result = await sendBulkSendblueMessages(recipients);
     const response = NextResponse.json(result);
@@ -66,7 +59,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: error.errors }, { status: 400 });
     }
 
-    const status = error instanceof Error && error.message.includes('opt-out') ? 400 : 500;
+    const status = 500;
     console.error('Error sending SMS:', error);
     const message = error instanceof Error ? error.message : 'Internal Server Error';
     return NextResponse.json({ error: message }, { status });
