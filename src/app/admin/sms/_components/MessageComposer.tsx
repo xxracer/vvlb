@@ -3,8 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { AlertCircle, Send, User } from 'lucide-react';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Send, User } from 'lucide-react';
 
 interface MessageComposerProps {
   message: string;
@@ -72,12 +71,12 @@ export function MessageComposer({
         </div>
         <Textarea
           id="sms-message"
-          placeholder="Hi {{firstName}}, it's Vanessa from Viva La Beauty. Reply STOP to opt out."
+          placeholder="Hi {{firstName}}, it's Vanessa from Viva La Beauty."
           value={message}
           onChange={(e) => onMessageChange(e.target.value)}
           rows={4}
           className="min-h-[80px] resize-none text-base sm:text-sm"
-          maxLength={2000}
+          maxLength={1600}
         />
         <div className="flex justify-between text-xs text-muted-foreground sm:text-sm">
           <span>{message.length} chars</span>
@@ -117,14 +116,6 @@ export function MessageComposer({
           Tip: Use <code className="rounded bg-muted px-1">{'{{firstName}}'}</code> to personalize.
         </p>
       )}
-
-      <Alert variant="default" className="bg-amber-50 py-2 text-xs sm:py-3 sm:text-sm">
-        <AlertCircle className="h-3 w-3 sm:h-4 sm:w-4" />
-        <AlertTitle>TCPA</AlertTitle>
-        <AlertDescription className="text-xs sm:text-sm">
-          Only send to opted-in contacts. Include opt-out instructions.
-        </AlertDescription>
-      </Alert>
 
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <span className="text-xs text-muted-foreground sm:text-sm">
