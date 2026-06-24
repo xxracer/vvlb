@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from 'react';
-import { Award, Users, Clock, Star } from 'lucide-react';
+import { Award, Clock, Star } from 'lucide-react';
 
 const stats = [
   { icon: Award, value: 12, suffix: '+', label: 'Years Experience', color: '#D8006E' },

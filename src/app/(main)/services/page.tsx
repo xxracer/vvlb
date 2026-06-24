@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import ServiceCard from '@/components/shared/ServiceCard';
 import { Loader2 } from 'lucide-react';
 import Image from 'next/image';
-import { getAcuityAppointmentTypes, type AcuityAppointmentType, type AcuityPackage } from '@/ai/flows/acuity-booking-flow';
+import { type AcuityAppointmentType, type AcuityPackage } from '@/ai/flows/acuity-booking-flow';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { Gift, Box, User, UserPlus } from 'lucide-react';
@@ -60,7 +60,12 @@ export default function ServicesPage() {
 
   useEffect(() => {
     let servicesToDisplay: (AcuityAppointmentType | AcuityPackage)[] = [];
-    const menKeywords = ["men's", "gentleman’s", "the gentleman's"];
+    const menKeywords = ["men", "gentleman"];
+
+    function isMenService(name: string): boolean {
+      const normalized = name.toLowerCase().replace(/['’]/g, '').replace(/\s+/g, ' ').trim();
+      return menKeywords.some(kw => normalized.includes(kw));
+    }
 
     const categories: Record<SubCategory, string[]> = {
       'Face': ['nose', 'lip', 'chin', 'brow', 'eyebrow', 'face', 'sideburn', 'ear', 'facial'],
@@ -71,13 +76,9 @@ export default function ServicesPage() {
     if (category === 'women' || category === 'men') {
       let genderSpecificServices = allServices;
       if (category === 'men') {
-        genderSpecificServices = allServices.filter(service =>
-          menKeywords.some(kw => service.name.toLowerCase().includes(kw))
-        );
+        genderSpecificServices = allServices.filter(service => isMenService(service.name));
       } else { // women
-        genderSpecificServices = allServices.filter(service =>
-          !menKeywords.some(kw => service.name.toLowerCase().includes(kw))
-        );
+        genderSpecificServices = allServices.filter(service => !isMenService(service.name));
       }
 
       if (activeSubCategory) {

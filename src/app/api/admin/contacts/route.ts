@@ -26,10 +26,27 @@ export async function GET(request: Request) {
 
     const yearParam = searchParams.get('year');
     const monthParam = searchParams.get('month');
+    const appointmentTypeIDParam = searchParams.get('appointmentTypeID');
     const daysBack = parseInt(searchParams.get('daysBack') || '90', 10);
     const limit = parseInt(searchParams.get('limit') || '1000', 10);
 
-    const options: { year?: number; month?: number; daysBack?: number; limit?: number } = { daysBack, limit };
+    if (!Number.isFinite(daysBack) || daysBack < 1 || daysBack > 365) {
+      return NextResponse.json({ error: 'daysBack must be between 1 and 365.' }, { status: 400 });
+    }
+
+    if (!Number.isFinite(limit) || limit < 1 || limit > 5000) {
+      return NextResponse.json({ error: 'limit must be between 1 and 5000.' }, { status: 400 });
+    }
+
+    let appointmentTypeID: number | undefined;
+    if (appointmentTypeIDParam) {
+      appointmentTypeID = parseInt(appointmentTypeIDParam, 10);
+      if (Number.isNaN(appointmentTypeID) || appointmentTypeID <= 0) {
+        return NextResponse.json({ error: 'Invalid appointmentTypeID.' }, { status: 400 });
+      }
+    }
+
+    const options: { year?: number; month?: number; daysBack?: number; limit?: number; appointmentTypeID?: number } = { daysBack, limit };
 
     if (yearParam && monthParam) {
       const year = parseInt(yearParam, 10);
@@ -41,6 +58,10 @@ export async function GET(request: Request) {
 
       options.year = year;
       options.month = month;
+    }
+
+    if (appointmentTypeID != null) {
+      options.appointmentTypeID = appointmentTypeID;
     }
 
     const contacts = await getAcuityContacts(options);

@@ -14,6 +14,13 @@ interface ServiceCardProps {
 export default function ServiceCard({ service, onSelect, isSelected }: ServiceCardProps) {
   const imageHint = service.name.toLowerCase().split(' ').slice(0,2).join(' ') || 'beauty service';
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onSelect();
+    }
+  };
+
   return (
     <Card
       className={cn(
@@ -22,6 +29,10 @@ export default function ServiceCard({ service, onSelect, isSelected }: ServiceCa
         isSelected && "ring-2 ring-[#D8006E] shadow-xl shadow-[#D8006E]/10 border-[#D8006E]/30"
       )}
       onClick={onSelect}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="button"
+      aria-pressed={isSelected}
     >
       <CardHeader className="p-0">
         <div className="relative w-full h-64 bg-gray-50 overflow-hidden">
@@ -85,7 +96,6 @@ export default function ServiceCard({ service, onSelect, isSelected }: ServiceCa
               ? "bg-[#D8006E]/10 text-[#D8006E] border border-[#D8006E]/20"
               : "bg-gradient-to-r from-[#D8006E] to-[#b8005e] text-white border-0 hover:shadow-lg hover:shadow-[#D8006E]/20"
           )}
-          aria-pressed={isSelected}
         >
           {isSelected ? (
             <>

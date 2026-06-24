@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import { NextResponse } from 'next/server';
 import {
   createAdminSession,
@@ -31,11 +32,17 @@ export async function POST(request: Request) {
       );
     }
 
-    if (submittedPassword !== expectedPassword) {
+    const submittedBuffer = Buffer.from(submittedPassword);
+    const expectedBuffer = Buffer.from(expectedPassword);
+
+    if (
+      submittedBuffer.length !== expectedBuffer.length ||
+      !crypto.timingSafeEqual(submittedBuffer, expectedBuffer)
+    ) {
       return NextResponse.json(
         { error: 'Invalid password.' },
         { status: 401 }
-        );
+      );
     }
 
     await createAdminSession();

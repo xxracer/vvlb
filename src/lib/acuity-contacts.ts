@@ -59,6 +59,8 @@ export interface GetAcuityContactsOptions {
   daysBack?: number;
   /** Maximum number of appointments to fetch. Default 1000. */
   limit?: number;
+  /** Filter by Acuity appointment type ID. */
+  appointmentTypeID?: number;
 }
 
 function resolveDateRange(options: GetAcuityContactsOptions): { minDate: string; maxDate: string } {
@@ -104,7 +106,8 @@ export async function getAcuityContacts(options: GetAcuityContactsOptions = {}):
 
   while (offset < limit) {
     const batchLimit = Math.min(pageSize, limit - offset);
-    const endpoint = `/appointments?minDate=${minDate}&maxDate=${maxDate}&limit=${batchLimit}&offset=${offset}`;
+    const typeFilter = options.appointmentTypeID ? `&appointmentTypeID=${options.appointmentTypeID}` : '';
+    const endpoint = `/appointments?minDate=${minDate}&maxDate=${maxDate}&limit=${batchLimit}&offset=${offset}${typeFilter}`;
 
     const data = await fetchAcuityAPI(endpoint);
     const appointments = Array.isArray(data) ? (data as AcuityAppointment[]) : [];

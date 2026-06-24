@@ -2,15 +2,11 @@
 "use client";
 
 import Script from 'next/script';
-import { useEffect } from 'react';
 
 const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
 const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID;
 
 export default function GoogleAnalytics() {
-  useEffect(() => {
-  }, []);
-
   return (
     <>
       {GOOGLE_ANALYTICS_ID && (

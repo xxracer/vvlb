@@ -29,7 +29,8 @@ export async function fetchAcuityAPI(endpoint: string, options: RequestInit = {}
   const response = await fetch(`${ACUITY_API_BASE_URL}${endpoint}`, {
     ...options,
     headers,
-    cache: 'no-store'
+    cache: 'no-store',
+    signal: options.signal ?? AbortSignal.timeout(15_000),
   });
 
   if (!response.ok) {
@@ -314,6 +315,19 @@ export async function resolveBookingServices(serviceIds: number[]): Promise<{
   };
 }
 
+interface CreateAcuityAppointmentPayload {
+  appointmentTypeID: number;
+  datetime: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  calendarID: number;
+  phone?: string;
+  notes?: string;
+  addonIDs?: number[];
+  fields?: { id: number; value: string }[];
+}
+
 export async function createAcuityAppointment(input: CreateAcuityAppointmentInput): Promise<AcuityAppointment> {
   const { appointmentTypeID, date, time, firstName, lastName, email, phone, notes, addonIDs, calendarID, fields } = CreateAcuityAppointmentInputSchema.parse(input);
 
@@ -322,7 +336,7 @@ export async function createAcuityAppointment(input: CreateAcuityAppointmentInpu
   const utcDate = fromZonedTime(dateTimeStr, 'America/Chicago');
   const isoDatetime = formatInTimeZone(utcDate, 'America/Chicago', "yyyy-MM-dd'T'HH:mm:ssXXX");
 
-  const payload: any = {
+  const payload: CreateAcuityAppointmentPayload = {
     appointmentTypeID,
     datetime: isoDatetime,
     firstName,

@@ -15,10 +15,11 @@ import { categorizeServicesForArea } from '@/lib/acuity-helpers';
 
 type BookingStep = 'selectGender' | 'selectService';
 
-const ServiceArea = ({ position, label, onClick }: { position: string, label: string, onClick: () => void }) => (
+const ServiceArea = ({ position, label, onClick, color }: { position: string, label: string, onClick: () => void, color?: string }) => (
     <div
         onClick={onClick}
-        className={`absolute ${position} w-24 h-24 rounded-full cursor-pointer flex items-center justify-center text-center p-2 transition-all duration-300 transform hover:scale-110 shadow-md`}
+        className={`absolute ${position} w-24 h-24 rounded-full cursor-pointer flex items-center justify-center text-center p-2 transition-all duration-300 transform hover:scale-110 shadow-lg ring-2 ring-white/50 backdrop-blur-sm`}
+        style={{ backgroundColor: color || 'rgba(216, 0, 110, 0.85)' }}
     >
         <span className="font-semibold text-xs leading-tight text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]">{label}</span>
     </div>
@@ -167,15 +168,15 @@ export default function AcuityScheduler() {
                         />
                         {selectedGender === 'female' ? (
                             <>
-                            <ServiceArea position="top-[8%] left-1/2 -translate-x-1/2" label="Face Services" onClick={() => handleAreaClick('face', 'Female Face Services')} />
-                            <ServiceArea position="top-[30%] left-1/2 -translate-x-1/2" label="Mid Body Services" onClick={() => handleAreaClick('mid', 'Female Mid Body Services')} />
-                            <ServiceArea position="top-[52%] left-1/2 -translate-x-1/2" label="Lower Body Services" onClick={() => handleAreaClick('low', 'Female Lower Body Services')} />
+                            <ServiceArea position="top-[8%] left-1/2 -translate-x-1/2" label="Face Services" color="#D8006E" onClick={() => handleAreaClick('face', 'Female Face Services')} />
+                            <ServiceArea position="top-[30%] left-1/2 -translate-x-1/2" label="Mid Body Services" color="#7400D8" onClick={() => handleAreaClick('mid', 'Female Mid Body Services')} />
+                            <ServiceArea position="top-[52%] left-1/2 -translate-x-1/2" label="Lower Body Services" color="#ff4da6" onClick={() => handleAreaClick('low', 'Female Lower Body Services')} />
                             </>
                         ) : (
                              <>
-                            <ServiceArea position="top-[7%] left-1/2 -translate-x-1/2" label="Face Services" onClick={() => handleAreaClick('face', 'Male Face Services')} />
-                            <ServiceArea position="top-[28%] left-1/2 -translate-x-1/2" label="Mid Body Services" onClick={() => handleAreaClick('mid', 'Male Mid Body Services')} />
-                            <ServiceArea position="top-[50%] left-1/2 -translate-x-1/2" label="Lower Body Services" onClick={() => handleAreaClick('low', 'Male Lower Body Services')} />
+                            <ServiceArea position="top-[7%] left-1/2 -translate-x-1/2" label="Face Services" color="#D8006E" onClick={() => handleAreaClick('face', 'Male Face Services')} />
+                            <ServiceArea position="top-[28%] left-1/2 -translate-x-1/2" label="Mid Body Services" color="#7400D8" onClick={() => handleAreaClick('mid', 'Male Mid Body Services')} />
+                            <ServiceArea position="top-[50%] left-1/2 -translate-x-1/2" label="Lower Body Services" color="#ff4da6" onClick={() => handleAreaClick('low', 'Male Lower Body Services')} />
                             </>
                         )}
                     </div>
@@ -191,7 +192,15 @@ export default function AcuityScheduler() {
                                         {servicesForSelectedArea.map(service => (
                                             <li
                                                 key={service.id}
+                                                tabIndex={0}
+                                                role="button"
                                                 onClick={() => handleBookService(service)}
+                                                onKeyDown={(e) => {
+                                                    if (e.key === 'Enter' || e.key === ' ') {
+                                                        e.preventDefault();
+                                                        handleBookService(service);
+                                                    }
+                                                }}
                                                 className="p-4 border rounded-lg hover:bg-accent hover:text-accent-foreground cursor-pointer flex items-start transition-colors shadow-sm hover:shadow-md"
                                             >
                                                 {service.image && (

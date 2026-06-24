@@ -26,7 +26,9 @@
       "Bash(pnpm install *)",
       "Bash(git add *)",
       "Bash(git commit -m 'fix: remove opt-out requirement from SMS admin and clean UI *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(pnpm tsc *)",
+      "Bash(pnpm build *)"
     ]
   }
 }
