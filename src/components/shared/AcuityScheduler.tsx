@@ -15,11 +15,10 @@ import { categorizeServicesForArea } from '@/lib/acuity-helpers';
 
 type BookingStep = 'selectGender' | 'selectService';
 
-const ServiceArea = ({ position, label, onClick, color }: { position: string, label: string, onClick: () => void, color?: string }) => (
+const ServiceArea = ({ position, label, onClick }: { position: string, label: string, onClick: () => void }) => (
     <div
         onClick={onClick}
-        className={`absolute ${position} w-24 h-24 rounded-full cursor-pointer flex items-center justify-center text-center p-2 transition-all duration-300 transform hover:scale-110 shadow-lg ring-2 ring-white/50 backdrop-blur-sm`}
-        style={{ backgroundColor: color || 'rgba(216, 0, 110, 0.85)' }}
+        className={`absolute ${position} w-24 h-24 rounded-full cursor-pointer flex items-center justify-center text-center p-2 transition-all duration-300 transform hover:scale-110 shadow-md`}
     >
         <span className="font-semibold text-xs leading-tight text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]">{label}</span>
     </div>
@@ -133,31 +132,8 @@ export default function AcuityScheduler() {
                 <CardDescription>Click on a body area to see available services, then select one to book.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6 md:space-y-0 md:grid md:grid-cols-12 md:gap-8">
-                <div className="md:col-span-5 lg:col-span-4 space-y-4">
-                    {/* Mobile-friendly body area buttons */}
-                    <div className="md:hidden grid grid-cols-1 gap-3">
-                        <Button
-                            onClick={() => handleAreaClick('face', `${selectedGender === 'female' ? 'Female' : 'Male'} Face Services`)}
-                            className="w-full py-6 text-lg rounded-xl bg-[#D8006E] hover:bg-[#b8005e] text-white"
-                        >
-                            Face Services
-                        </Button>
-                        <Button
-                            onClick={() => handleAreaClick('mid', `${selectedGender === 'female' ? 'Female' : 'Male'} Mid Body Services`)}
-                            className="w-full py-6 text-lg rounded-xl bg-[#7400D8] hover:bg-[#5e00b0] text-white"
-                        >
-                            Mid Body Services
-                        </Button>
-                        <Button
-                            onClick={() => handleAreaClick('low', `${selectedGender === 'female' ? 'Female' : 'Male'} Lower Body Services`)}
-                            className="w-full py-6 text-lg rounded-xl bg-[#ff4da6] hover:bg-[#e63d8f] text-white"
-                        >
-                            Lower Body Services
-                        </Button>
-                    </div>
-
-                    {/* Desktop body map with overlay hotspots */}
-                    <div className="hidden md:block relative w-full max-w-sm mx-auto aspect-[3/4]">
+                <div className="md:col-span-5 lg:col-span-4">
+                    <div className="relative w-full max-w-xs mx-auto aspect-[3/4] md:max-w-sm">
                         <Image
                             src={selectedGender === 'female' ? "https://static.wixstatic.com/media/c5947c_86a4d139ddf84a1abc29777a63ed8aee~mv2.jpg" : "https://static.wixstatic.com/media/c5947c_272dc65a82734c72833b063afa275335~mv2.jpg"}
                             alt={selectedGender === 'female' ? "Female body map for services" : "Male body map for services"}
@@ -168,15 +144,15 @@ export default function AcuityScheduler() {
                         />
                         {selectedGender === 'female' ? (
                             <>
-                            <ServiceArea position="top-[8%] left-1/2 -translate-x-1/2" label="Face Services" color="#D8006E" onClick={() => handleAreaClick('face', 'Female Face Services')} />
-                            <ServiceArea position="top-[30%] left-1/2 -translate-x-1/2" label="Mid Body Services" color="#7400D8" onClick={() => handleAreaClick('mid', 'Female Mid Body Services')} />
-                            <ServiceArea position="top-[52%] left-1/2 -translate-x-1/2" label="Lower Body Services" color="#ff4da6" onClick={() => handleAreaClick('low', 'Female Lower Body Services')} />
+                            <ServiceArea position="top-[8%] left-1/2 -translate-x-1/2" label="Face Services" onClick={() => handleAreaClick('face', 'Female Face Services')} />
+                            <ServiceArea position="top-[28%] left-1/2 -translate-x-1/2" label="Mid Body Services" onClick={() => handleAreaClick('mid', 'Female Mid Body Services')} />
+                            <ServiceArea position="top-[50%] left-1/2 -translate-x-1/2" label="Lower Body Services" onClick={() => handleAreaClick('low', 'Female Lower Body Services')} />
                             </>
                         ) : (
                              <>
-                            <ServiceArea position="top-[7%] left-1/2 -translate-x-1/2" label="Face Services" color="#D8006E" onClick={() => handleAreaClick('face', 'Male Face Services')} />
-                            <ServiceArea position="top-[28%] left-1/2 -translate-x-1/2" label="Mid Body Services" color="#7400D8" onClick={() => handleAreaClick('mid', 'Male Mid Body Services')} />
-                            <ServiceArea position="top-[50%] left-1/2 -translate-x-1/2" label="Lower Body Services" color="#ff4da6" onClick={() => handleAreaClick('low', 'Male Lower Body Services')} />
+                            <ServiceArea position="top-[7%] left-1/2 -translate-x-1/2" label="Face Services" onClick={() => handleAreaClick('face', 'Male Face Services')} />
+                            <ServiceArea position="top-[26%] left-1/2 -translate-x-1/2" label="Mid Body Services" onClick={() => handleAreaClick('mid', 'Male Mid Body Services')} />
+                            <ServiceArea position="top-[48%] left-1/2 -translate-x-1/2" label="Lower Body Services" onClick={() => handleAreaClick('low', 'Male Lower Body Services')} />
                             </>
                         )}
                     </div>
@@ -192,15 +168,7 @@ export default function AcuityScheduler() {
                                         {servicesForSelectedArea.map(service => (
                                             <li
                                                 key={service.id}
-                                                tabIndex={0}
-                                                role="button"
                                                 onClick={() => handleBookService(service)}
-                                                onKeyDown={(e) => {
-                                                    if (e.key === 'Enter' || e.key === ' ') {
-                                                        e.preventDefault();
-                                                        handleBookService(service);
-                                                    }
-                                                }}
                                                 className="p-4 border rounded-lg hover:bg-accent hover:text-accent-foreground cursor-pointer flex items-start transition-colors shadow-sm hover:shadow-md"
                                             >
                                                 {service.image && (
@@ -215,9 +183,9 @@ export default function AcuityScheduler() {
                                                         />
                                                     </div>
                                                 )}
-                                                <div className="flex-grow min-w-0">
-                                                    <h4 className="font-semibold break-words">{service.name}</h4>
-                                                    {service.description && <p className="text-sm text-muted-foreground max-w-prose line-clamp-2 break-words">{service.description}</p>}
+                                                <div className="flex-grow">
+                                                    <h4 className="font-semibold">{service.name}</h4>
+                                                    {service.description && <p className="text-sm text-muted-foreground max-w-prose line-clamp-2">{service.description}</p>}
                                                 </div>
                                                 <div className="text-right flex-shrink-0 ml-4">
                                                     <p className="font-bold text-lg text-primary">${service.price}</p>
@@ -234,10 +202,7 @@ export default function AcuityScheduler() {
                             <div className="text-center py-10 px-4">
                                 <CalendarDays className="mx-auto h-12 w-12 text-muted-foreground/50 mb-4" />
                                 <h3 className="text-lg font-semibold text-muted-foreground mb-2">View Services</h3>
-                                <p className="text-sm text-muted-foreground">
-                                    <span className="md:hidden">Please select a body area above to see the list of available services.</span>
-                                    <span className="hidden md:inline">Please click on a body area from the diagram on the left to see the list of available services.</span>
-                                </p>
+                                <p className="text-sm text-muted-foreground">Please click on a body area from the diagram on the left to see the list of available services.</p>
                             </div>
                         )}
                     </div>
