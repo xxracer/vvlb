@@ -2,7 +2,7 @@ import HeroSection from '@/components/sections/HeroSection';
 import FeaturedServicesSection from '@/components/sections/FeaturedServicesSection';
 import AboutSection from '@/components/sections/AboutSection';
 import TestimonialsSection from '@/components/sections/TestimonialsSection';
-import GiftCardSection from '@/components/sections/GiftCardSection';
+import FaqSection from '@/components/sections/FaqSection';
 import SponsorsSection from '@/components/sections/SponsorsSection';
 import CallToActionSection from '@/components/sections/CallToActionSection';
 import WaveDivider from '@/components/shared/WaveDivider';
@@ -24,7 +24,7 @@ export default async function HomePage() {
       </div>
       <AboutSection />
       <TestimonialsSection />
-      <GiftCardSection />
+      <FaqSection />
       <SponsorsSection />
       <CallToActionSection />
     </>

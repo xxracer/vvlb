@@ -1,35 +1,10 @@
+import { redirect } from 'next/navigation';
+import { GLOSSGENIUS_URL } from '@/lib/constants';
 
-import AcuityScheduler from '@/components/shared/AcuityScheduler';
-import { Suspense } from 'react';
-import Image from 'next/image';
-
-function BookingPageContent() {
-  return <AcuityScheduler />;
-}
-
+// GlossGenius blocks framing from third-party origins (X-Frame-Options / CSP
+// frame-ancestors), so /book cannot host the booking site in an iframe.
+// Instead, visiting /book redirects the user directly to the GlossGenius
+// site where they complete the booking.
 export default function BookingPage() {
-  return (
-    <div className="bg-gradient-to-br from-pink-50 via-background to-purple-50 py-12 md:py-16">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <div className="flex justify-center mb-4">
-            <Image src="https://static.wixstatic.com/media/c5947c_105b98aad40c4d4c8ca7de374634e9fa~mv2.png" alt="Viva La Beauty" width={60} height={60} className="h-16 w-16" />
-          </div>
-          <h1 className="text-4xl md:text-5xl font-headline font-semibold text-primary mb-4">
-            Create Your Perfect Appointment
-          </h1>
-          <p className="text-xl text-foreground max-w-3xl mx-auto font-body">
-            Select your desired service, date, and time below to book your appointment.
-          </p>
-        </div>
-        
-        <div className="max-w-5xl mx-auto">
-           <Suspense fallback={<div className="text-center p-12 h-[800px]">Loading Scheduler...</div>}>
-            <BookingPageContent />
-          </Suspense>
-        </div>
-
-      </div>
-    </div>
-  );
+  redirect(GLOSSGENIUS_URL);
 }

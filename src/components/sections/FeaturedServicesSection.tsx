@@ -1,44 +1,15 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import ServiceCard from '@/components/shared/ServiceCard';
-import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { Loader2, ArrowRight, Sparkles, ShieldCheck, Award, Heart } from 'lucide-react';
-import { getAcuityAppointmentTypes, type AcuityAppointmentType } from '@/ai/flows/acuity-booking-flow';
-import { useToast } from '@/hooks/use-toast';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { ArrowRight, Sparkles, ShieldCheck, Award, Heart, Clock, PlusCircle } from 'lucide-react';
+
+import { getPopularServices } from '@/lib/services-catalog';
+import { GLOSSGENIUS_URL } from '@/lib/constants';
 
 export default function FeaturedServicesSection() {
-  const [featuredServices, setFeaturedServices] = useState<AcuityAppointmentType[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const { toast } = useToast();
-  const router = useRouter();
-
-  useEffect(() => {
-    async function fetchServices() {
-      try {
-        setIsLoading(true);
-        const allServices = (await getAcuityAppointmentTypes()).filter(s => !s.private);
-
-        const popularServiceKeywords = ["brazilian", "full leg", "brow"];
-        const featured = popularServiceKeywords.map(keyword => {
-          return allServices.find(s =>
-            s.name.toLowerCase().includes(keyword) &&
-            !s.name.toLowerCase().includes("men's")
-          );
-        }).filter((service): service is AcuityAppointmentType => service !== undefined);
-
-        setFeaturedServices(featured);
-      } catch (error) {
-        console.error("Failed to fetch services:", error);
-        toast({ title: "Error", description: "Could not load featured services.", variant: "destructive" });
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchServices();
-  }, [toast]);
+  const popularServices = getPopularServices();
 
   return (
     <section className="py-28 bg-white relative overflow-hidden">
@@ -48,10 +19,15 @@ export default function FeaturedServicesSection() {
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-[#D8006E]/10 shadow-sm mb-6">
             <Sparkles className="h-4 w-4 text-[#D8006E]" />
-            <span className="text-sm text-[#D8006E] tracking-widest uppercase font-semibold">Popular</span>
+            <span className="text-sm text-[#D8006E] tracking-widest uppercase font-semibold">
+              Popular
+            </span>
           </div>
           <h2 className="text-4xl md:text-5xl font-headline font-bold text-[#1a1a1a] leading-[1.1]">
-            Most Loved <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D8006E] to-[#7400D8]">Services</span>
+            Most Loved{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D8006E] to-[#7400D8]">
+              Services
+            </span>
           </h2>
           <div className="mt-8">
             <Button
@@ -68,22 +44,50 @@ export default function FeaturedServicesSection() {
           </div>
         </div>
 
-        {isLoading ? (
-          <div className="flex justify-center items-center h-40">
-            <Loader2 className="h-12 w-12 animate-spin text-[#D8006E]" />
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredServices.map((service) => (
-              <ServiceCard
-                key={service.id}
-                service={service}
-                onSelect={() => router.push(`/book`)}
-                isSelected={false}
-              />
-            ))}
-          </div>
-        )}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {popularServices.map((service) => (
+            <Card
+              key={service.id}
+              className="flex flex-col h-full overflow-hidden transition-all duration-500 group bg-white border-gray-100 hover:border-[#D8006E]/20 hover:shadow-xl hover:shadow-[#D8006E]/5 hover:-translate-y-1"
+            >
+              <CardHeader className="p-0">
+                <div className="relative w-full h-48 bg-gray-50 overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={service.image}
+                    alt={service.name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+              </CardHeader>
+              <CardContent className="flex-grow p-6">
+                <CardTitle className="text-xl font-headline text-[#1a1a1a] mb-2 group-hover:text-[#D8006E] transition-colors">
+                  {service.name}
+                </CardTitle>
+                <CardDescription className="text-sm mb-4 line-clamp-3">
+                  {service.description}
+                </CardDescription>
+                <div className="flex justify-between items-center text-sm">
+                  <span className="font-bold text-xl text-[#D8006E]">${service.price}</span>
+                  <span className="flex items-center text-gray-400">
+                    <Clock className="mr-1.5 h-4 w-4" />
+                    {service.duration} min
+                  </span>
+                </div>
+              </CardContent>
+              <CardFooter className="p-6 pt-0 mt-auto">
+                <Button
+                  asChild
+                  className="w-full rounded-xl bg-gradient-to-r from-[#D8006E] to-[#b8005e] text-white border-0 hover:shadow-lg hover:shadow-[#D8006E]/20"
+                >
+                  <a href={GLOSSGENIUS_URL} target="_blank" rel="noopener noreferrer">
+                    <PlusCircle className="mr-2 h-4 w-4" /> Book This Service
+                  </a>
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
 
         {/* Why Choose Us */}
         <div className="mt-20 pt-12 border-t border-gray-100">
@@ -101,21 +105,27 @@ export default function FeaturedServicesSection() {
                 <ShieldCheck className="h-6 w-6 text-[#D8006E]" />
               </div>
               <h4 className="font-semibold text-[#1a1a1a] mb-1">Expert Specialists</h4>
-              <p className="text-sm text-gray-500 font-body">Certified professionals with 12+ years of hands-on waxing expertise.</p>
+              <p className="text-sm text-gray-500 font-body">
+                Certified professionals with 12+ years of hands-on waxing expertise.
+              </p>
             </div>
             <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-[#ffe5ec]/50 border border-[#D8006E]/10 hover:bg-white hover:shadow-lg transition-all duration-300">
               <div className="w-12 h-12 rounded-full bg-[#7400D8]/10 flex items-center justify-center mb-4">
                 <Heart className="h-6 w-6 text-[#7400D8]" />
               </div>
               <h4 className="font-semibold text-[#1a1a1a] mb-1">Gentle Technique</h4>
-              <p className="text-sm text-gray-500 font-body">Premium hard wax and painless methods for sensitive skin.</p>
+              <p className="text-sm text-gray-500 font-body">
+                Premium hard wax and painless methods for sensitive skin.
+              </p>
             </div>
             <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-[#ffe5ec]/50 border border-[#D8006E]/10 hover:bg-white hover:shadow-lg transition-all duration-300">
               <div className="w-12 h-12 rounded-full bg-[#ff4da6]/10 flex items-center justify-center mb-4">
                 <Award className="h-6 w-6 text-[#ff4da6]" />
               </div>
               <h4 className="font-semibold text-[#1a1a1a] mb-1">Houston&apos;s Best</h4>
-              <p className="text-sm text-gray-500 font-body">Award-winning studio with 5.0 stars across hundreds of reviews.</p>
+              <p className="text-sm text-gray-500 font-body">
+                Award-winning studio with 5.0 stars across hundreds of reviews.
+              </p>
             </div>
           </div>
         </div>

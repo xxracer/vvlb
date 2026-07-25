@@ -5,12 +5,6 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'cdn-s.acuityscheduling.com',
-        port: '',
-        pathname: '/**', // Allows any path under this hostname
-      },
-      {
-        protocol: 'https',
         hostname: 'placehold.co', // For placeholder images
         port: '',
         pathname: '/**',

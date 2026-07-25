@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
+import { GLOSSGENIUS_URL } from '@/lib/constants';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -40,7 +41,7 @@ export default function Navbar() {
               asChild
               className="bg-gradient-to-r from-[#D8006E] to-[#b8005e] hover:from-[#e61a7d] hover:to-[#c90069] text-white border-0 shadow-lg hover:shadow-xl transition-all duration-500 rounded-full px-6"
             >
-              <Link href="/book">Book Now</Link>
+              <a href={GLOSSGENIUS_URL} target="_blank" rel="noopener noreferrer">Book Now</a>
             </Button>
           </nav>
 
@@ -84,7 +85,7 @@ export default function Navbar() {
                       asChild
                       className="w-full bg-gradient-to-r from-[#D8006E] to-[#b8005e] hover:from-[#e61a7d] hover:to-[#c90069] text-white border-0 rounded-full"
                     >
-                      <Link href="/book">Book Now</Link>
+                      <a href={GLOSSGENIUS_URL} target="_blank" rel="noopener noreferrer">Book Now</a>
                     </Button>
                   </SheetClose>
                 </div>

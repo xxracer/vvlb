@@ -1,5 +1,6 @@
 
 import type { Testimonial, SpecialOffer } from '@/types';
+import { GLOSSGENIUS_URL } from './constants';
 
 export const testimonials: Testimonial[] = [
   {
@@ -29,7 +30,7 @@ export const specialOffers: SpecialOffer[] = [
       description: 'New to Viva La Beauty? Enjoy 20% off your first service. Welcome to the family!',
       validUntil: 'Valid for your first visit.',
       ctaText: 'Book Now & Save',
-      ctaLink: '/book',
+      ctaLink: GLOSSGENIUS_URL,
       imageUrl: 'https://placehold.co/600x400.png',
       imageHint: 'spa products',
     },
@@ -49,7 +50,7 @@ export const specialOffers: SpecialOffer[] = [
       description: 'Love our services? Refer a friend and you both get $10 off your next visit!',
       validUntil: 'Ongoing promotion.',
       ctaText: 'Ask Us How',
-      ctaLink: '/book',
+      ctaLink: GLOSSGENIUS_URL,
       imageUrl: 'https://placehold.co/600x400.png',
       imageHint: 'friends laughing',
     },

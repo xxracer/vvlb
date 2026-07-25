@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { ArrowRight, CalendarDays, Star, Clock, MapPin, Quote } from 'lucide-react';
+import { GLOSSGENIUS_URL } from '@/lib/constants';
 
 type ReviewData = {
   text: string;
@@ -97,11 +98,11 @@ export default function HeroSection({ review }: { review?: ReviewData }) {
                 asChild
                 className="relative bg-gradient-to-r from-[#D8006E] to-[#b8005e] hover:from-[#e61a7d] hover:to-[#c90069] text-white border-0 shadow-xl shadow-[#D8006E]/30 hover:shadow-2xl hover:shadow-[#D8006E]/40 transition-all duration-500 px-8 py-6 sm:px-10 sm:py-7 text-base sm:text-lg rounded-full hover:-translate-y-1 overflow-hidden group"
               >
-                <Link href="/book">
+                <a href={GLOSSGENIUS_URL} target="_blank" rel="noopener noreferrer">
                   <span className="absolute inset-0 bg-white/20 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700" />
                   <CalendarDays className="mr-2 h-5 w-5 relative z-10" />
                   <span className="relative z-10">Book Appointment</span>
-                </Link>
+                </a>
               </Button>
               <Button
                 size="lg"

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { MapPin, Heart, Shield, Zap } from 'lucide-react';
+import { GLOSSGENIUS_URL } from '@/lib/constants';
 
 const features = [
   { icon: Heart, text: 'Personalized Care' },
@@ -93,7 +94,7 @@ export default function AboutSection() {
               asChild
               className="bg-gradient-to-r from-[#D8006E] to-[#b8005e] hover:from-[#e61a7d] hover:to-[#c90069] text-white border-0 shadow-lg hover:shadow-xl transition-all duration-500 rounded-full px-8"
             >
-              <Link href="/book">Book Your Visit</Link>
+              <a href={GLOSSGENIUS_URL} target="_blank" rel="noopener noreferrer">Book Your Visit</a>
             </Button>
           </div>
         </div>

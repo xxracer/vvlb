@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { CalendarCheck2, Sparkles } from 'lucide-react';
+import { GLOSSGENIUS_URL } from '@/lib/constants';
 
 export default function CallToActionSection() {
   return (
@@ -32,10 +32,10 @@ export default function CallToActionSection() {
           asChild
           className="bg-white text-[#D8006E] hover:bg-gray-50 hover:scale-105 transition-all duration-500 shadow-2xl rounded-full px-12 py-8 text-lg font-bold"
         >
-          <Link href="/book">
+          <a href={GLOSSGENIUS_URL} target="_blank" rel="noopener noreferrer">
             <CalendarCheck2 className="mr-3 h-6 w-6" />
             Schedule Your Visit
-          </Link>
+          </a>
         </Button>
       </div>
     </section>
