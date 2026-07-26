@@ -40,7 +40,7 @@ export const specialOffers: SpecialOffer[] = [
       description: 'Purchase a package of 5 Brazilian waxes and get the 6th one completely free!',
       validUntil: 'Ongoing promotion.',
       ctaText: 'Learn More',
-      ctaLink: '/services',
+      ctaLink: GLOSSGENIUS_URL,
       imageUrl: 'https://placehold.co/600x400.png',
       imageHint: 'waxing tools',
     },

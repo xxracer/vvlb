@@ -11,7 +11,7 @@ import { GLOSSGENIUS_URL } from '@/lib/constants';
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
-  { href: '/services', label: 'Services' },
+  { href: GLOSSGENIUS_URL, label: 'Services', external: true },
 ];
 
 export default function Navbar() {
@@ -28,15 +28,27 @@ export default function Navbar() {
           </Link>
 
           <nav className="hidden md:flex space-x-8 items-center">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-gray-600 hover:text-[#D8006E] transition-colors duration-300 font-medium text-sm uppercase tracking-wide"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) =>
+              link.external ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 hover:text-[#D8006E] transition-colors duration-300 font-medium text-sm uppercase tracking-wide"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-gray-600 hover:text-[#D8006E] transition-colors duration-300 font-medium text-sm uppercase tracking-wide"
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
             <Button
               asChild
               className="bg-gradient-to-r from-[#D8006E] to-[#b8005e] hover:from-[#e61a7d] hover:to-[#c90069] text-white border-0 shadow-lg hover:shadow-xl transition-all duration-500 rounded-full px-6"
@@ -69,13 +81,25 @@ export default function Navbar() {
                   <div className="flex flex-col space-y-1">
                     {navLinks.map((link) => (
                       <SheetClose key={link.href} asChild>
-                        <Link
-                          href={link.href}
-                          className="text-lg text-gray-700 hover:text-[#D8006E] transition-colors py-3 block border-b border-gray-100"
-                          onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                          {link.label}
-                        </Link>
+                        {link.external ? (
+                          <a
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-lg text-gray-700 hover:text-[#D8006E] transition-colors py-3 block border-b border-gray-100"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            {link.label}
+                          </a>
+                        ) : (
+                          <Link
+                            href={link.href}
+                            className="text-lg text-gray-700 hover:text-[#D8006E] transition-colors py-3 block border-b border-gray-100"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            {link.label}
+                          </Link>
+                        )}
                       </SheetClose>
                     ))}
                   </div>

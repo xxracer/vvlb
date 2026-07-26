@@ -1,6 +1,5 @@
 "use client";
 
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, Sparkles, ShieldCheck, Award, Heart, Clock, PlusCircle } from 'lucide-react';
@@ -36,10 +35,10 @@ export default function FeaturedServicesSection() {
               asChild
               className="border-[#1a1a1a]/20 text-[#1a1a1a] hover:bg-[#1a1a1a]/5 hover:border-[#1a1a1a]/30 rounded-full px-8 bg-white/50 backdrop-blur-sm"
             >
-              <Link href="/services">
+              <a href={GLOSSGENIUS_URL} target="_blank" rel="noopener noreferrer">
                 View All Services
                 <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
+              </a>
             </Button>
           </div>
         </div>

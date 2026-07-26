@@ -33,7 +33,14 @@ export default function Footer() {
             <h3 className="text-lg font-headline font-semibold mb-6 text-white">Quick Links</h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <Link href="/services" className="text-gray-400 hover:text-[#D8006E] transition-colors duration-300">Services</Link>
+                <a
+                  href={GLOSSGENIUS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-[#D8006E] transition-colors duration-300"
+                >
+                  Services
+                </a>
               </li>
               <li>
                 <a

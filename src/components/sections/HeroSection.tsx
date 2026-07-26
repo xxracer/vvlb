@@ -1,6 +1,5 @@
 "use client";
 
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { ArrowRight, CalendarDays, Star, Clock, MapPin, Quote } from 'lucide-react';
@@ -110,10 +109,10 @@ export default function HeroSection({ review }: { review?: ReviewData }) {
                 asChild
                 className="border-[#1a1a1a]/15 text-[#1a1a1a] hover:bg-white/60 hover:border-[#1a1a1a]/25 transition-all duration-300 px-8 py-6 sm:px-10 sm:py-7 text-base sm:text-lg rounded-full bg-white/30 backdrop-blur-md hover:-translate-y-1"
               >
-                <Link href="/services">
+                <a href={GLOSSGENIUS_URL} target="_blank" rel="noopener noreferrer">
                   Explore Services
                   <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
+                </a>
               </Button>
             </div>
 
