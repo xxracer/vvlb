@@ -1,63 +1,116 @@
-import { Metadata } from 'next';
-import Image from 'next/image';
+import type { Metadata } from 'next';
+import Icon from '@/components/site/Icon';
 
 export const metadata: Metadata = {
-  title: 'About Me - Viva La Beauty',
-  description: 'Learn about the passion and expertise behind Viva La Beauty, your premier waxing studio in Sugar Land, TX.',
+  title: 'Meet Vanessa Avellaneda | Viva La Beauty Wax, Sugar Land',
+  description:
+    'Meet Vanessa Avellaneda, the licensed esthetician behind Viva La Beauty Wax, a private speed waxing studio in Sugar Land, TX.',
 };
 
 export default function AboutPage() {
-  const imageUrl = "https://static.wixstatic.com/media/c5947c_6166529c84414c4c9168682fe1c28f8e~mv2.jpg";
-
   return (
-    <div className="bg-gradient-to-br from-pink-50 via-background to-purple-50 py-12 md:py-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto bg-card p-8 md:p-12 rounded-lg shadow-xl">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
-            
-            {/* Columna Izquierda: Imagen */}
-            <div className="md:col-span-5">
-              <div className="relative aspect-[3/4] rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-500">
-                <Image 
-                  src={imageUrl}
-                  alt="Founder of Viva La Beauty"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  style={{ objectFit: 'cover' }}
-                  priority // Cargar esta imagen de forma prioritaria
-                />
-              </div>
+    <main id="main" className="vanessa-page">
+      <section className="vanessa-hero" aria-labelledby="vanessa-heading">
+        <div className="wrap vanessa-layout">
+          <div className="vanessa-copy">
+            <p className="eyebrow">
+              <span></span> Founder &amp; Licensed Esthetician
+            </p>
+            <h1 id="vanessa-heading">
+              Meet <em>Vanessa.</em>
+            </h1>
+            <p>
+              I opened Viva La Beauty to give my Sugar Land clients a private studio where waxing
+              feels personal, efficient, and comfortable.
+            </p>
+            <p>
+              I’ve spent over 12 years refining my technique. My specialty is speed waxing, including
+              my signature 15-minute women’s Brazilian. I also offer men’s Brazilians, full-body
+              waxing, and brow shaping.
+            </p>
+            <div className="hero-actions">
+              <a className="button" href="https://vivalabeautywax.glossgenius.com/services">
+                Book with Vanessa <Icon name="arrow-up-right" />
+              </a>
+              <a className="text-link" href="/#services">
+                Explore Services <Icon name="arrow-right" />
+              </a>
             </div>
+          </div>
+          <figure className="vanessa-photo">
+            <img
+              src="/assets/vanessa-studio-portrait.webp"
+              width="1320"
+              height="1670"
+              alt="Vanessa Avellaneda, founder and licensed esthetician at Viva La Beauty Wax"
+              fetchPriority="high"
+              decoding="async"
+            />
+            <figcaption>
+              Vanessa Avellaneda <span>Owner, Viva La Beauty Wax</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
 
-            {/* Columna Derecha: Texto */}
-            <div className="md:col-span-7">
-              <div className="text-left">
-                <h1 className="text-5xl font-headline font-semibold text-primary mb-8">
-                  About Me
-                </h1>
-              </div>
-              <div className="prose prose-lg max-w-none font-body text-foreground">
-                <p>
-                  I’ve always had a strong passion for beauty and skincare, which led me to become a licensed esthetician. Over the years, I’ve gained experience working at some of the best waxing studios in Sugar Land, TX. That’s when I realized there was a need for a more personalized, efficient, and comfortable waxing experience. Driven by a desire to offer something unique, I decided to open Viva La Beauty, a cozy, intimate waxing studio where we focus on expert hair removal using the most advanced and skin-friendly techniques.
-                </p>
-                <p>
-                  At Viva La Beauty, we specialize in Brazilian waxing, full-body waxing, and eyebrow waxing, ensuring smooth, long-lasting results for all my clients. Whether you're searching for “eyebrow waxing near me” or “waxing in Sugar Land, TX,” we’ve created a space where you can feel confident, cared for, and right at home.
-                </p>
-                <p>
-                  Located in the heart of Sugar Land, TX, Viva La Beauty is your go-to destination for all things waxing. We use only the best products to make the process as comfortable as possible while achieving the best results. From Brazliian waxing to leg and arm waxing, to facial waxing, we offer a full range of services to keep you looking your best.
-                </p>
-                <p>
-                  If you're looking for the best waxing experience you’re in the right place. We pride ourselves on offering a relaxing atmosphere where you can unwind while ensuring a precise and comfortable experience every time.
-                </p>
-                <p>
-                  Whether it’s your first time or you're a regular, I’m here to make your visit special. Book your appointment today and see why Viva La Beauty is the preferred choice for waxing in Sugar Land, TX. Let us help you achieve smooth, radiant skin!
-                </p>
-              </div>
-            </div>
-
+      <section className="about section-pad" aria-labelledby="vanessa-studio-heading">
+        <div className="wrap about-layout">
+          <figure className="about-photo">
+            <img
+              src="/assets/studio.jpg"
+              width="960"
+              height="1280"
+              alt="The private Viva La Beauty Wax treatment room in Sugar Land"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>
+              <Icon name="pin" /> Sugar Land, Texas <span>Suite 192</span>
+            </figcaption>
+          </figure>
+          <div className="about-copy">
+            <p className="eyebrow">
+              <span></span> The Studio
+            </p>
+            <h2 id="vanessa-studio-heading">One-on-one care.</h2>
+            <p>
+              I started in esthetics because I loved beauty and skin care. Working in waxing studios
+              around Sugar Land taught me how much a thoughtful, one-on-one visit matters, especially
+              for a first wax.
+            </p>
+            <p>
+              Bring your questions, tell me about any skin sensitivities, and I’ll walk you through
+              what to expect before we get started.
+            </p>
+            <a className="text-link" href="/#testimonials">
+              Read Client Reviews <Icon name="arrow-right" />
+            </a>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+
+      <section className="visit" aria-labelledby="visit-vanessa-heading">
+        <div className="wrap visit-layout">
+          <div>
+            <p className="eyebrow">
+              <span></span> By Appointment
+            </p>
+            <h2 id="visit-vanessa-heading">Visit the Sugar Land studio</h2>
+            <p>15315 Southwest Fwy, Suite 192, Sugar Land, TX 77478</p>
+          </div>
+          <div className="visit-actions">
+            <a className="button" href="https://vivalabeautywax.glossgenius.com/services">
+              Book an Appointment <Icon name="arrow-up-right" />
+            </a>
+            <a
+              className="text-link"
+              href="https://www.google.com/maps/place/Viva+La+Beauty/@29.6033214,-95.6124699,17z"
+            >
+              Get Directions <Icon name="arrow-up-right" />
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
